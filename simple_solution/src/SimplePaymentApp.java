@@ -26,7 +26,7 @@ public class SimplePaymentApp {
             BankAPI bank = new BankAPI();
             bank.chargeCreditCard(amount);
 
-        } else if (paymentType.equalsIgnoreCase("DUITNOW")) { 
+        } else if (paymentType.equalsIgnoreCase("DUITNOW")) {
             // TIGHT COUPLING: Direct dependency on DuitNowAPI
             DuitNowAPI duitnow = new DuitNowAPI();
             duitnow.sendPayment(amount);
@@ -40,7 +40,7 @@ public class SimplePaymentApp {
         SimplePaymentApp app = new SimplePaymentApp();
         // Running the simple solution
         app.processOrder("CREDIT_CARD", 100.50);
-        app.processOrder("DUITNOW", 50.00); 
+        app.processOrder("DUITNOW", 50.00);
         app.processOrder("BITCOIN", 999.99); // Error case
     }
 }

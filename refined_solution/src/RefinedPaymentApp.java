@@ -37,7 +37,7 @@ class PaymentFactory {
         if (type.equalsIgnoreCase("CREDIT_CARD")) {
             return new CreditCardStrategy();
         } else if (type.equalsIgnoreCase("DUITNOW")) {
-            return new DuitNowStrategy(); 
+            return new DuitNowStrategy();
         } else {
             throw new IllegalArgumentException("Unknown payment type: " + type);
         }
@@ -72,7 +72,7 @@ public class RefinedPaymentApp {
         app.processOrder("CREDIT_CARD", 120.00);
         app.processOrder("DUITNOW", 45.50);
 
-        // Testing Error Handling 
+        // Testing Error Handling
         app.processOrder("CASH", 10.00);
     }
 }
