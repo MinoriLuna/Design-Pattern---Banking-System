@@ -1,4 +1,4 @@
-// These represent external systems we are tightly coupled to.
+// These represent external systems tightly coupled.
 class BankAPI {
     public void chargeCreditCard(double amount) {
         System.out.println("[BankAPI] Connecting to bank...");
@@ -17,17 +17,16 @@ class DuitNowAPI {
 public class SimplePaymentApp {
 
     // This method is HARD to test because it creates 'new BankAPI()' inside.
-    // You cannot run this method without printing to the console (side effect).
     public void processOrder(String paymentType, double amount) {
         System.out.println("\nProcessing order for: " + paymentType);
 
         if (paymentType.equalsIgnoreCase("CREDIT_CARD")) {
-            // TIGHT COUPLING: Direct dependency on BankAPI
+            // tight coupling which has direct dependency on BankAPI
             BankAPI bank = new BankAPI();
             bank.chargeCreditCard(amount);
 
         } else if (paymentType.equalsIgnoreCase("DUITNOW")) {
-            // TIGHT COUPLING: Direct dependency on DuitNowAPI
+            // tight coupling which has direct dependency on duitnowapi
             DuitNowAPI duitnow = new DuitNowAPI();
             duitnow.sendPayment(amount);
 
@@ -38,7 +37,6 @@ public class SimplePaymentApp {
 
     public static void main(String[] args) {
         SimplePaymentApp app = new SimplePaymentApp();
-        // Running the simple solution
         app.processOrder("CREDIT_CARD", 100.50);
         app.processOrder("DUITNOW", 50.00);
         app.processOrder("BITCOIN", 999.99); // Error case

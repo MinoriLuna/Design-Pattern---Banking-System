@@ -1,6 +1,3 @@
-// ==========================================
-// PATTERN 1: STRATEGY PATTERN
-
 // The Strategy Interface
 // Testability Benefit: This allows us to use "Mock" strategies during testing.
 interface PaymentStrategy {
@@ -11,23 +8,18 @@ interface PaymentStrategy {
 class CreditCardStrategy implements PaymentStrategy {
     @Override
     public void pay(double amount) {
-        // In a real app, this would connect to Visa/Mastercard
         System.out.println("[Strategy] Processing Credit Card charge of $" + amount);
     }
 }
 
-// Concrete Strategy: DuitNow (CHANGED from PayPal)
+// Concrete Strategy: DuitNow
 class DuitNowStrategy implements PaymentStrategy {
     @Override
     public void pay(double amount) {
-        // In a real app, this would connect to DuitNow Gateway
         System.out.println("[Strategy] Generating DuitNow QR for $" + amount);
-        System.out.println("           (Logic is isolated here, safe to mock in tests)");
+        System.out.println("(Logic is isolated here, safe to mock in tests)");
     }
 }
-
-// ==========================================
-// PATTERN 2: FACTORY PATTERN
 
 // The Factory Class
 // Testability Benefit: Handles the COMPLEXITY of creating the right object.
@@ -53,11 +45,10 @@ public class RefinedPaymentApp {
         System.out.println("\n--- Processing Refined Order ---");
 
         try {
-            // Step 1: Use FACTORY to get the correct strategy
-            // We don't use 'new' or 'if-else' logic here.
+            // Use factory to get the correct strategy
             PaymentStrategy strategy = PaymentFactory.getPaymentMethod(paymentType);
 
-            // Step 2: Use STRATEGY to pay
+            // Using strategy to pay
             strategy.pay(amount);
 
         } catch (IllegalArgumentException e) {
@@ -67,11 +58,8 @@ public class RefinedPaymentApp {
 
     public static void main(String[] args) {
         RefinedPaymentApp app = new RefinedPaymentApp();
-
-        // Testing the Refined Solution
         app.processOrder("CREDIT_CARD", 120.00);
         app.processOrder("DUITNOW", 45.50);
-
         // Testing Error Handling
         app.processOrder("CASH", 10.00);
     }
